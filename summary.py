@@ -1,11 +1,11 @@
 def summary():
 
-	import os 
+	import os
 	import sqlite3
 	import string
-	import offline_user_count 
+	import offline_user_count
 
-	path_name = '/home/Jennifer.Meggs/QATWatch/Source/QATWatch.db'
+	path_name = 'QATWatch.db'
 	conn = sqlite3.connect(path_name)
 	c = conn.cursor()
 
@@ -18,7 +18,7 @@ def summary():
 	time_stamp = c.execute(query2)
 	time_stamp = time_stamp.fetchall()
 	time_stamp = str(time_stamp)
-	
+
 	all_users = c.execute(query3)
 	all_users = all_users.fetchall()
 	all_users = int(all_users[0][0])
@@ -26,9 +26,9 @@ def summary():
 	last_time = []
 	for i in time_stamp:
 		if str.isdigit(i) == True:
-			last_time.append(i)	
+			last_time.append(i)
 	last_time = ''.join(last_time)
-	
+
 	idle_check = '.'
 	idle_count = 0
 	active_count = 0
@@ -48,11 +48,11 @@ def summary():
 	title_pad = ''.join(title_pad)
 	count = offline_user_count.offline_user_count()
 	term_count = active_count + idle_count
-	user_count = all_users-count  
+	user_count = all_users-count
 	print (title_pad)
 	print ('Terminal Summary')
 	print (Table_bars)
-	
+
 	print ('Active Terminals:         %d' %active_count)
 	print (' ')
 	print ('Idle Terminals:           %d' %idle_count)

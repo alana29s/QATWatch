@@ -4,8 +4,8 @@ def usage_history():
 	import sqlite3
 	import string
 
-# Connecting to the database 
-	path_name = '/home/Jennifer.Meggs/QATWatch/Source/QATWatch.db'
+# Connecting to the database
+	path_name = 'QATWatch.db'
 	conn = sqlite3.connect(path_name)
 	c = conn.cursor()
 	fj = os.popen('date --date="1 days ago" | cut -d " " -f1,2,3')
@@ -55,7 +55,7 @@ def usage_history():
 				title = [line_pad,title,line_pad]
 				title = ''.join(title)
 				print (title)
-				print (breakline)	
+				print (breakline)
 				print (headers)
 				print (breakline)
 			for i in sorted_data:
@@ -83,7 +83,7 @@ def usage_history():
 				if i[1] == uname:
 					if hourtcheck == True and hourocheck == True and minutetcheck == True and minuteocheck == True:
 						minutes = (int(minutet)*10)+int(minuteo)
-						hours = (int(hourt)*10)+int(houro)	
+						hours = (int(hourt)*10)+int(houro)
 						user_hours += hours
 						user_minutes += minutes
 						total_hours += user_hours
@@ -98,7 +98,7 @@ def usage_history():
 					else:
 						pad_ID = ID
 					if len(terminal) < len('Terminal |'):
-						pad = (len('Terminal |')-len(terminal))*' ' 
+						pad = (len('Terminal |')-len(terminal))*' '
 						pad_term = [terminal,pad]
 						pad_term = ''.join(pad_term)
 					else:
@@ -114,45 +114,45 @@ def usage_history():
 					amount_time_logged = [hourt,houro,'h',' ',minutet,minuteo,'m']
 					amount_time_logged = ''.join(amount_time_logged)
 					temp_list = [pad_term,pad_login,pad_out,amount_time_logged]
-					temp_list = '  '.join(temp_list)	
+					temp_list = '  '.join(temp_list)
 					print(temp_list)
 				h = 0
 				while user_minutes > 60:
 					user_minutes -= 60
 					h += 1
 					user_hours = user_hours + h
-	
+
 			print (' ')
 			print ('-----------------------------------------')
-			print ("Total User Login Time: %dh %dm" %(user_hours,user_minutes))	
+			print ("Total User Login Time: %dh %dm" %(user_hours,user_minutes))
 			print (' ')
 			print (' ')
 	sum_of_hourst = []
 	for i in hours_tlist:
 		if str.isdigit(i) == True:
 			sum_of_hourst.append(int(i))
-			
+
 	sum_of_hourso = []
 	for i in hours_olist:
 		if str.isdigit(i) == True:
 			sum_of_hourso.append(int(i))
-		
+
 	sum_minutest = []
 	for i in minutes_tlist:
 		if str.isdigit(i) == True:
 			sum_minutest.append(int(i))
-	
+
 	sum_minuteso = []
 	for i in minutes_olist:
 		if str.isdigit(i) == True:
 			sum_minuteso.append(int(i))
-	
-	
+
+
 	sum_ht = sum(sum_of_hourst)
 	sum_ho = sum(sum_of_hourso)
 	sum_mt = sum(sum_minutest)
 	sum_mo = sum(sum_minuteso)
-		
+
 
 	total_hours = (sum_ht*10) + sum_ho
 	total_minutes = (sum_mt*10) + sum_mo
@@ -160,11 +160,12 @@ def usage_history():
 	while total_minutes > 60:
 		totes += 1
 		total_minutes -= 60
-	
+
 	total_hours = totes + total_hours
-	
-	
-	avg = ((total_hours*60)+total_minutes)/user_count
+
+	avg = 0
+	if user_count > 0:
+		avg = ((total_hours*60)+total_minutes)/user_count
 	avg_h = 0
 	while avg > 60:
 		avg -= 60

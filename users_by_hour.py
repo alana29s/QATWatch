@@ -12,7 +12,7 @@ os.system("clear")
 
 def hourly_users():
 	# Create database connection
-	conn = sqlite3.connect("/home/Jennifer.Meggs/QATWatch/Source/QATWatch.db")
+	conn = sqlite3.connect("QATWatch.db")
 	conn.text_factory = str #this returns output as string instead of unicode with the u
 	c = conn.cursor()
 
